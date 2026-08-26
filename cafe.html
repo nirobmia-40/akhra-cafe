@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>আখড়া Café — Coffee, Shakes, Good Vibes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F5ECDA;
+    --cream-2:#EEDFC1;
+    --espresso:#231409;
+    --espresso-2:#3C2717;
+    --rust:#B8532B;
+    --rust-dark:#8F3E1F;
+    --sage:#5E6E49;
+    --brass:#C89B4E;
+    --ink:#2A1B12;
+    --paper-line: rgba(42,27,18,0.14);
+    --shadow: 0 18px 40px -18px rgba(35,20,9,0.45);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Hind Siliguri', sans-serif;
+    font-size:17px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit;}
+  .bn{font-family:'Baloo Da 2', 'Hind Siliguri', sans-serif;}
+  .script{font-family:'Caveat', cursive;}
+  .display{font-family:'Fraunces', serif;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    padding:18px 0;
+    transition:background .35s ease, padding .35s ease, box-shadow .35s ease;
+  }
+  header.solid{
+    background:rgba(35,20,9,0.92);
+    padding:12px 0;
+    box-shadow:0 8px 24px -12px rgba(0,0,0,0.5);
+    backdrop-filter:blur(6px);
+  }
+  nav{display:flex; align-items:center; justify-content:space-between; gap:20px;}
+  .brand{display:flex; align-items:center; gap:12px; text-decoration:none; color:var(--cream);}
+  .brand img{width:44px; height:44px; border-radius:50%; box-shadow:0 4px 14px rgba(0,0,0,0.4);}
+  .brand .name{font-size:1.28rem; font-weight:700; letter-spacing:.2px;}
+  .brand .name .sub{display:block; font-family:'Caveat',cursive; font-size:1rem; font-weight:600; color:var(--brass); margin-top:-4px;}
+  .nav-links{display:flex; gap:30px; list-style:none; margin:0; padding:0;}
+  .nav-links a{
+    color:var(--cream); text-decoration:none; font-size:.95rem; font-weight:500;
+    opacity:.88; position:relative; padding-bottom:4px;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:2px;
+    background:var(--brass); transform:scaleX(0); transform-origin:left; transition:transform .3s ease;
+  }
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-cta{
+    background:var(--rust); color:#fff; padding:10px 20px; border-radius:999px;
+    font-weight:600; font-size:.9rem; text-decoration:none; white-space:nowrap;
+    box-shadow:0 8px 20px -8px rgba(184,83,43,0.7);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .nav-cta:hover{transform:translateY(-2px); box-shadow:0 12px 24px -8px rgba(184,83,43,0.85);}
+  .nav-toggle{display:none; background:none; border:none; color:var(--cream); font-size:1.6rem; cursor:pointer;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative; min-height:100svh; display:flex; align-items:center;
+    background:linear-gradient(180deg, rgba(20,11,5,0.55), rgba(20,11,5,0.86) 60%, var(--espresso) 100%), url('cover.png') center/cover no-repeat;
+    color:var(--cream); overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 50% 20%, rgba(200,155,78,0.16), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative; z-index:2; width:100%; text-align:center; padding:150px 28px 110px;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:.82rem; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--brass); font-weight:600; margin-bottom:22px;
+  }
+  .eyebrow .dot{width:5px; height:5px; border-radius:50%; background:var(--brass);}
+  .hero h1{
+    font-size:clamp(3.4rem, 11vw, 7.2rem);
+    margin:0; font-weight:700; line-height:1;
+    text-shadow:0 10px 40px rgba(0,0,0,0.45);
+  }
+  .hero .cafe-script{
+    display:block; font-family:'Caveat', cursive; font-weight:700;
+    font-size:clamp(2.6rem, 8vw, 4.6rem); color:var(--brass);
+    margin-top:-.15em; transform:rotate(-2deg);
+  }
+  .hero .tagline{
+    margin:26px auto 0; max-width:520px; font-size:1.05rem; letter-spacing:.04em;
+    color:rgba(245,236,218,0.88); text-transform:uppercase; font-weight:500;
+  }
+  .hero .tagline .bar{opacity:.5; margin:0 10px;}
+  .hero .bn-tag{
+    margin-top:10px; font-family:'Baloo Da 2', sans-serif; font-size:1.15rem; color:var(--cream); opacity:.92;
+  }
+  .hero-ctas{display:flex; gap:16px; justify-content:center; margin-top:42px; flex-wrap:wrap;}
+  .btn{
+    padding:14px 30px; border-radius:999px; font-weight:600; font-size:.98rem;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .25s ease, box-shadow .25s ease, background .25s ease;
+  }
+  .btn-primary{background:var(--rust); color:#fff; box-shadow:0 14px 30px -12px rgba(184,83,43,0.8);}
+  .btn-primary:hover{transform:translateY(-3px); box-shadow:0 18px 34px -10px rgba(184,83,43,0.9);}
+  .btn-ghost{border:1.5px solid rgba(245,236,218,0.55); color:var(--cream);}
+  .btn-ghost:hover{background:rgba(245,236,218,0.12); transform:translateY(-3px);}
+
+  /* steam signature */
+  .steam-wrap{position:absolute; left:50%; top:64px; transform:translateX(-50%); z-index:2; opacity:.85;}
+  .steam-wrap svg{width:70px; height:90px;}
+  .steam path{
+    stroke:var(--brass); stroke-width:3; fill:none; stroke-linecap:round;
+    stroke-dasharray:60; stroke-dashoffset:0;
+    animation:rise 3.6s ease-in-out infinite;
+    opacity:0;
+  }
+  .steam path:nth-child(2){animation-delay:.5s;}
+  .steam path:nth-child(3){animation-delay:1s;}
+  @keyframes rise{
+    0%{opacity:0; transform:translateY(6px) scale(1);}
+    18%{opacity:.9;}
+    75%{opacity:.25;}
+    100%{opacity:0; transform:translateY(-22px) scale(1.06);}
+  }
+
+  .scroll-cue{
+    position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    color:rgba(245,236,218,0.7); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
+  }
+  .scroll-cue .line{width:1px; height:34px; background:linear-gradient(var(--brass), transparent); animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.3;} 50%{opacity:1;}}
+
+  /* ---------- STORY STRIP ---------- */
+  .story{
+    background:var(--espresso-2); color:var(--cream);
+    padding:64px 0; text-align:center; position:relative;
+  }
+  .story::after{
+    content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+    background:linear-gradient(90deg, transparent, rgba(200,155,78,0.4), transparent);
+  }
+  .story .quote{
+    font-family:'Caveat', cursive; font-size:clamp(1.8rem, 4vw, 2.6rem);
+    color:var(--brass); margin:0 0 16px; font-weight:600;
+  }
+  .story p{max-width:640px; margin:0 auto; color:rgba(245,236,218,0.82); font-size:1rem;}
+
+  /* ---------- SECTION HEADS ---------- */
+  section{padding:100px 0;}
+  .sec-head{text-align:center; max-width:640px; margin:0 auto 56px;}
+  .sec-eyebrow{
+    font-size:.78rem; letter-spacing:.24em; text-transform:uppercase; color:var(--rust);
+    font-weight:700; margin-bottom:14px; display:block;
+  }
+  .sec-head h2{
+    font-family:'Baloo Da 2', sans-serif; font-size:clamp(2rem, 4vw, 2.7rem);
+    margin:0 0 14px; color:var(--ink); font-weight:700;
+  }
+  .sec-head p{color:rgba(42,27,18,0.72); margin:0; font-size:1.02rem;}
+
+  /* ---------- MENU ---------- */
+  .menu{background:var(--cream);}
+  .menu-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;}
+  .menu-card{
+    background:#fff; border-radius:22px; padding:34px 30px; box-shadow:var(--shadow);
+    border:1px solid var(--paper-line); position:relative; overflow:hidden;
+  }
+  .menu-card .icon{width:52px; height:52px; margin-bottom:18px;}
+  .menu-card h3{
+    font-family:'Baloo Da 2', sans-serif; font-size:1.4rem; margin:0 0 4px; color:var(--ink);
+  }
+  .menu-card .card-sub{font-family:'Caveat', cursive; color:var(--rust); font-size:1.15rem; margin:0 0 20px;}
+  .menu-row{
+    display:flex; align-items:baseline; gap:8px; padding:10px 0;
+    border-bottom:1px dashed var(--paper-line);
+  }
+  .menu-row:last-child{border-bottom:none;}
+  .menu-row .item{font-weight:600; font-size:.98rem; white-space:nowrap;}
+  .menu-row .leader{flex:1; border-bottom:1px dotted rgba(42,27,18,0.3); transform:translateY(-4px);}
+  .menu-row .price{font-family:'Fraunces', serif; font-weight:600; color:var(--rust-dark); white-space:nowrap;}
+
+  /* ---------- CHALKBOARD / SPECIALS (signature) ---------- */
+  .chalk-section{background:var(--espresso); padding:110px 0;}
+  .chalkboard{
+    max-width:760px; margin:0 auto; background:#2c2018; border-radius:16px;
+    padding:52px 44px; position:relative;
+    box-shadow: inset 0 0 0 10px #4a3628, inset 0 0 0 12px #6b4f38, 0 30px 60px -20px rgba(0,0,0,0.6);
+    background-image:
+      radial-gradient(rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size:5px 5px;
+  }
+  .washi{
+    position:absolute; top:-14px; left:40px; width:70px; height:26px;
+    background:repeating-linear-gradient(45deg, var(--brass), var(--brass) 6px, #a97e37 6px, #a97e37 12px);
+    opacity:.85; transform:rotate(-6deg); border-radius:2px;
+  }
+  .washi.r{left:auto; right:40px; transform:rotate(6deg);}
+  .chalkboard h3{
+    font-family:'Caveat', cursive; color:#F5ECDA; text-align:center; font-size:2.4rem;
+    margin:0 0 6px; font-weight:700;
+  }
+  .chalkboard .sub-bn{
+    text-align:center; font-family:'Baloo Da 2', sans-serif; color:var(--brass);
+    font-size:1rem; margin-bottom:30px; opacity:.9;
+  }
+  .chalk-list{list-style:none; margin:0; padding:0; display:grid; gap:16px;}
+  .chalk-list li{
+    display:flex; justify-content:space-between; align-items:baseline;
+    color:#EFE6D2; font-family:'Caveat', cursive; font-size:1.5rem;
+    border-bottom:1px dashed rgba(239,230,210,0.25); padding-bottom:10px;
+  }
+  .chalk-list li span.p{color:var(--brass); font-size:1.3rem;}
+  .chalk-list li small{
+    display:block; font-family:'Hind Siliguri', sans-serif; font-size:.78rem;
+    color:rgba(239,230,210,0.55); margin-top:2px; font-weight:400;
+  }
+
+  /* ---------- AMBIANCE ---------- */
+  .ambiance{background:var(--cream-2);}
+  .amb-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:24px; align-items:stretch;}
+  .amb-photo{
+    border-radius:22px; overflow:hidden; position:relative; box-shadow:var(--shadow);
+    min-height:420px; background:#000;
+  }
+  .amb-photo img{width:100%; height:100%; object-fit:cover; position:absolute; inset:0;}
+  .amb-photo .tag{
+    position:absolute; left:22px; bottom:22px; background:rgba(35,20,9,0.72);
+    color:var(--cream); padding:10px 18px; border-radius:999px; font-size:.85rem;
+    font-family:'Caveat', cursive; font-size:1.15rem; backdrop-filter:blur(4px);
+  }
+  .amb-side{display:grid; gap:24px; grid-template-rows:1fr 1fr;}
+  .amb-note{
+    background:#fff; border-radius:22px; padding:30px 28px; box-shadow:var(--shadow);
+    border:1px solid var(--paper-line); display:flex; flex-direction:column; justify-content:center;
+  }
+  .amb-note .script-big{font-family:'Caveat', cursive; color:var(--rust); font-size:1.8rem; margin:0 0 8px;}
+  .amb-note p{margin:0; color:rgba(42,27,18,0.75); font-size:.96rem;}
+
+  /* ---------- VISIT ---------- */
+  .visit{background:var(--cream);}
+  .visit-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  .visit-card{
+    background:var(--espresso); color:var(--cream); border-radius:26px; padding:46px 42px;
+    box-shadow:var(--shadow); position:relative; overflow:hidden;
+  }
+  .visit-card::before{
+    content:""; position:absolute; width:260px; height:260px; border-radius:50%;
+    background:radial-gradient(circle, rgba(200,155,78,0.18), transparent 70%);
+    top:-80px; right:-80px;
+  }
+  .visit-card h3{font-family:'Baloo Da 2', sans-serif; font-size:1.6rem; margin:0 0 22px;}
+  .hours-row{
+    display:flex; justify-content:space-between; padding:10px 0;
+    border-bottom:1px solid rgba(245,236,218,0.12); font-size:.95rem;
+  }
+  .hours-row:last-of-type{border-bottom:none;}
+  .hours-row .d{opacity:.75;}
+  .hours-row .t{font-weight:600; color:var(--brass);}
+  .addr{margin-top:26px; padding-top:22px; border-top:1px dashed rgba(245,236,218,0.2); font-size:.95rem; opacity:.9;}
+  .addr strong{display:block; margin-bottom:6px; font-family:'Baloo Da 2', sans-serif; font-weight:600; color:var(--cream); opacity:1;}
+
+  .map-mock{
+    border-radius:26px; overflow:hidden; position:relative; min-height:380px;
+    background:
+      linear-gradient(135deg, #E7D9BB 25%, transparent 25%) -20px 0/40px 40px,
+      linear-gradient(225deg, #E7D9BB 25%, transparent 25%) -20px 0/40px 40px,
+      linear-gradient(315deg, #E7D9BB 25%, transparent 25%) 0 0/40px 40px,
+      linear-gradient(45deg, #E7D9BB 25%, #EFE1C8 25%) 0 0/40px 40px;
+    box-shadow:var(--shadow); display:flex; align-items:center; justify-content:center;
+  }
+  .pin{display:flex; flex-direction:column; align-items:center; gap:10px;}
+  .pin svg{width:54px; height:54px; filter:drop-shadow(0 10px 14px rgba(184,83,43,0.4));}
+  .pin span{
+    background:#fff; padding:8px 16px; border-radius:999px; font-weight:600;
+    font-family:'Caveat', cursive; font-size:1.2rem; color:var(--rust-dark); box-shadow:var(--shadow);
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--espresso); color:rgba(245,236,218,0.7); padding:56px 0 30px;}
+  .foot-top{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;
+    padding-bottom:30px; border-bottom:1px solid rgba(245,236,218,0.12);
+  }
+  .foot-brand{display:flex; align-items:center; gap:12px;}
+  .foot-brand img{width:46px; height:46px; border-radius:50%;}
+  .foot-brand .n{color:var(--cream); font-family:'Baloo Da 2', sans-serif; font-size:1.15rem; font-weight:700;}
+  .foot-brand .s{font-family:'Caveat', cursive; color:var(--brass); font-size:1rem;}
+  .foot-social{display:flex; gap:14px;}
+  .foot-social a{
+    width:40px; height:40px; border-radius:50%; border:1px solid rgba(245,236,218,0.25);
+    display:flex; align-items:center; justify-content:center; text-decoration:none;
+    transition:background .25s ease, transform .25s ease;
+  }
+  .foot-social a:hover{background:var(--rust); transform:translateY(-3px); border-color:var(--rust);}
+  .foot-social svg{width:18px; height:18px; fill:var(--cream);}
+  .foot-bottom{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px;
+    padding-top:24px; font-size:.85rem;
+  }
+  .foot-bottom .heart{color:var(--rust); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    .menu-grid{grid-template-columns:1fr; }
+    .amb-grid{grid-template-columns:1fr;}
+    .amb-side{grid-template-rows:1fr 1fr;}
+    .visit-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:0; right:0; height:100vh; width:min(78vw,320px);
+      background:var(--espresso); flex-direction:column; justify-content:center; align-items:flex-start;
+      padding:40px; gap:26px; transform:translateX(100%); transition:transform .35s ease; z-index:60;
+    }
+    .nav-links.open{transform:translateX(0); box-shadow:-20px 0 40px rgba(0,0,0,0.4);}
+    .nav-cta{display:none;}
+    .nav-toggle{display:block;}
+    .hero-inner{padding-top:130px;}
+    section{padding:72px 0;}
+    .story{padding:52px 0;}
+    .visit-card{padding:34px 26px;}
+  }
+  @media (max-width:480px){
+    .hero h1{font-size:clamp(2.6rem, 15vw, 3.6rem);}
+    .brand .name{font-size:1.05rem;}
+    .btn{padding:12px 22px; font-size:.9rem;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <div class="wrap">
+    <nav>
+      <a href="#top" class="brand">
+        <img src="cafe profile pic.png" alt="আখড়া Café badge logo">
+        <span class="name">আখড়া<span class="sub">Café</span></span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#specials">Specials</a></li>
+        <li><a href="#ambiance">Ambiance</a></li>
+        <li><a href="#visit">Visit</a></li>
+      </ul>
+      <a href="#visit" class="nav-cta">Find Us</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="steam-wrap" aria-hidden="true">
+    <svg viewBox="0 0 60 80" class="steam">
+      <path d="M10 78 C 2 62, 18 58, 12 44 C 6 30, 20 24, 14 10"/>
+      <path d="M30 78 C 22 60, 38 56, 32 40 C 26 24, 40 20, 34 4"/>
+      <path d="M50 78 C 42 62, 58 58, 52 44 C 46 30, 60 24, 54 10"/>
+    </svg>
+  </div>
+  <div class="hero-inner">
+    <span class="eyebrow"><span class="dot"></span>Road site Café<span class="dot"></span></span>
+    <h1 class="bn">আখড়া<span class="cafe-script">Café</span></h1>
+    <div class="tagline">Coffee <span class="bar">•</span> Shakes <span class="bar">•</span> Good Vibes</div>
+    <div class="bn-tag">Enjoy your lonliness ♥</div>
+    <div class="hero-ctas">
+      <a href="#menu" class="btn btn-primary">See the Menu</a>
+      <a href="#visit" class="btn btn-ghost">Find Us</a>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>Scroll</span><span class="line"></span></div>
+</section>
+
+<div class="story">
+  <div class="wrap">
+    <p class="quote">"Freshly made everyday, no preservatives — just pure."</p>
+    <p>আখড়া মানে আড্ডা দেওয়ার জায়গা — এক কাপ কফি, একটা ভালো বই, আর পুরনো বন্ধুদের গল্প। আমাদের ক্যাফেতে প্রতিদিন বানানো হয় খাঁটি উপকরণে, ভালোবাসা মিশিয়ে।</p>
+  </div>
+</div>
+
+<section class="menu" id="menu">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">What we pour &amp; pack</span>
+      <h2>The Menu</h2>
+      <p>Small-batch coffee, hand-blended shakes, and snacks made fresh in-house — every single day.</p>
+    </div>
+    <div class="menu-grid">
+
+      <div class="menu-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none">
+          <path d="M8 18h26v10a13 13 0 0 1-13 13h0A13 13 0 0 1 8 28V18z" stroke="#B8532B" stroke-width="2.4"/>
+          <path d="M34 20h3a5 5 0 0 1 0 10h-3" stroke="#B8532B" stroke-width="2.4"/>
+          <path d="M14 10c-1.5 2 1.5 3 0 5M21 10c-1.5 2 1.5 3 0 5" stroke="#C89B4E" stroke-width="2.2" stroke-linecap="round"/>
+        </svg>
+        <h3>Coffee</h3>
+        <p class="card-sub">brewed slow, served warm</p>
+        <div class="menu-row"><span class="item">Akhra Signature Latte</span><span class="leader"></span><span class="price">৳180</span></div>
+        <div class="menu-row"><span class="item">Cold Brew</span><span class="leader"></span><span class="price">৳160</span></div>
+        <div class="menu-row"><span class="item">Cappuccino</span><span class="leader"></span><span class="price">৳150</span></div>
+        <div class="menu-row"><span class="item">Espresso Shot</span><span class="leader"></span><span class="price">৳100</span></div>
+      </div>
+
+      <div class="menu-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none">
+          <path d="M16 8h16l-2 30a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4L16 8z" stroke="#B8532B" stroke-width="2.4"/>
+          <path d="M14 18h20" stroke="#C89B4E" stroke-width="2.2"/>
+          <path d="M24 4v6" stroke="#B8532B" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+        <h3>Shakes</h3>
+        <p class="card-sub">thick, cold, hand-blended</p>
+        <div class="menu-row"><span class="item">Cookies &amp; Cream</span><span class="leader"></span><span class="price">৳220</span></div>
+        <div class="menu-row"><span class="item">Belgian Chocolate</span><span class="leader"></span><span class="price">৳220</span></div>
+        <div class="menu-row"><span class="item">Mango Malai</span><span class="leader"></span><span class="price">৳200</span></div>
+        <div class="menu-row"><span class="item">Nutty Caramel</span><span class="leader"></span><span class="price">৳230</span></div>
+      </div>
+
+      <div class="menu-card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none">
+          <path d="M6 26c6-10 30-10 36 0-4 2-8 3-18 3S10 28 6 26z" stroke="#B8532B" stroke-width="2.4" stroke-linejoin="round"/>
+          <path d="M12 26c2 6 8 8 12 8s10-2 12-8" stroke="#C89B4E" stroke-width="2.2"/>
+        </svg>
+        <h3>Bites</h3>
+        <p class="card-sub">a little something on the side</p>
+        <div class="menu-row"><span class="item">Butter Croissant</span><span class="leader"></span><span class="price">৳120</span></div>
+        <div class="menu-row"><span class="item">Chicken Sandwich</span><span class="leader"></span><span class="price">৳190</span></div>
+        <div class="menu-row"><span class="item">Banana Bread</span><span class="leader"></span><span class="price">৳110</span></div>
+        <div class="menu-row"><span class="item">Cheese Toastie</span><span class="leader"></span><span class="price">৳160</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="chalk-section" id="specials">
+  <div class="wrap">
+    <div class="chalkboard">
+      <div class="washi"></div>
+      <div class="washi r"></div>
+      <h3>Today's Specials</h3>
+      <div class="sub-bn">আজকের বিশেষ</div>
+      <ul class="chalk-list">
+        <li>Hazelnut Cold Brew <small>iced, single origin</small> <span class="p">৳170</span></li>
+        <li>Pesto Grilled Sandwich <small>fresh basil, mozzarella</small> <span class="p">৳210</span></li>
+        <li>Salted Caramel Shake <small>house favorite</small> <span class="p">৳240</span></li>
+        <li>Cinnamon Bun <small>baked this morning</small> <span class="p">৳130</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="ambiance" id="ambiance">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">The corner table is waiting</span>
+      <h2>Ambiance</h2>
+      <p>Warm light, worn wood, and enough plants to make you forget you're in the city.</p>
+    </div>
+    <div class="amb-grid">
+      <div class="amb-photo">
+        <img src="cafe cover.png" alt="Akhra Café interior with warm lighting and plants">
+        <span class="tag">good coffee, good vibes</span>
+      </div>
+      <div class="amb-side">
+        <div class="amb-note">
+          <p class="script-big">The window seat</p>
+          <p>Morning light, a cap on the chair, a notebook still open from yesterday. Come back to it.</p>
+        </div>
+        <div class="amb-note">
+          <p class="script-big">No rush here</p>
+          <p>Order a second cup. Stay for the third. আখড়া is built for lingering, not leaving.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Come say hi</span>
+      <h2>Visit Us</h2>
+      <p>Open every day for coffee, conversation, and the occasional long stay.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-card">
+        <h3>Hours &amp; Location</h3>
+       <div class="hours-row">
+        <span class="d">Everyday</span>
+        <span class="t">3:30 PM – 8:15 PM</span>
+          </div>
+        <div class="addr">
+          <strong>আখড়া Café</strong>
+          Dhanbari Upazila, Dhanbari, Tangail, Bangladesh<br>
+          <a href="https://share.google/2DwMvUYeeEfwB8zSp" target="_blank" rel="noopener" style="color:var(--brass); text-decoration:underline;">View on Google Maps</a>
+        </div>
+      </div>
+      <div class="map-mock">
+        <div class="pin">
+         <svg viewBox="0 0 24 24" fill="#B8532B">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/>
+        </svg>
+        <span>We are here</span>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="cafe profile pic.png" alt="Akhra Café logo">
+        <div>
+          <div class="n">আখড়া Café</div>
+          <div class="s">Coffee, Shakes, Books, Good Vibes</div>
+        </div>
+      </div>
+      <div class="foot-social">
+        <a href="https://www.facebook.com/akhra.cafe" aria-label="Facebook" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+        </a>
+        <a href="https://instagram.com/akhra.cafe" aria-label="Instagram" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.06 2 .25 2.5.42a5 5 0 0 1 1.8 1.2 5 5 0 0 1 1.2 1.8c.17.5.36 1.3.42 2.5.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.06 1.2-.25 2-.42 2.5a5 5 0 0 1-1.2 1.8 5 5 0 0 1-1.8 1.2c-.5.17-1.3.36-2.5.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.06-2-.25-2.5-.42a5 5 0 0 1-1.8-1.2 5 5 0 0 1-1.2-1.8c-.17-.5-.36-1.3-.42-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.06-1.2.25-2 .42-2.5a5 5 0 0 1 1.2-1.8 5 5 0 0 1 1.8-1.2c.5-.17 1.3-.36 2.5-.42C8.4 2.2 8.8 2.2 12 2.2zm0 3.05a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5zm0 11.13a4.38 4.38 0 1 1 0-8.76 4.38 4.38 0 0 1 0 8.76zm7.02-11.4a1.58 1.58 0 1 1-3.15 0 1.58 1.58 0 0 1 3.15 0z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 আখড়া Café. All rights reserved.</span>
+      <span>Made with <span class="heart">♥</span> আখড়া team</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header.classList.toggle('solid', window.scrollY > 40);
+  onScroll();
+  window.addEventListener('scroll', onScroll, {passive:true});
+
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+</script>
+
+</body>
+</html>
